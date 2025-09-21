@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "338d8052-ce51-4d43-9d27-13747b2e6055",
+		"name": "Spring AI - Ollama Chat",
+		"description": "Postman collection for POST /api/chat on http://localhost:8081, plus Actuator endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10652289"
+	},
+	"item": [
+		{
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+									"pm.test('Body contains status=UP', function () {",
+									"  const json = pm.response.json();",
+									"  pm.expect(json.status).to.be.oneOf(['UP','DOWN','OUT_OF_SERVICE','UNKNOWN']);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/metrics/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"metrics",
+								"health"
+							]
+						},
+						"description": "Spring Boot Actuator health endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+									"pm.test('Info returns JSON object', function () {",
+									"  pm.response.to.be.withBody;",
+									"  const json = pm.response.json();",
+									"  pm.expect(json).to.be.an('object');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/metrics/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"metrics",
+								"info"
+							]
+						},
+						"description": "Spring Boot Actuator info endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Metrics - Index",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+									"pm.test('Contains a metrics array', function () {",
+									"  const json = pm.response.json();",
+									"  pm.expect(json).to.have.property('names');",
+									"  pm.expect(json.names).to.be.an('array');",
+									"});",
+									"// Save a common metric name for subsequent requests, if present",
+									"const json = pm.response.json();",
+									"const prefer = ['jvm.threads.live','http.server.requests','process.uptime'];",
+									"const found = prefer.find(n => json.names.includes(n));",
+									"pm.environment.set('metricName', found || (json.names[0] || 'process.uptime'));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/metrics/metrics",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"metrics",
+								"metrics"
+							]
+						},
+						"description": "Spring Boot Actuator metrics index (list of metric names)."
+					},
+					"response": []
+				},
+				{
+					"name": "Metrics - Detail ({{metricName}})",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (!pm.environment.get('metricName')) {",
+									"  pm.environment.set('metricName', 'process.uptime');",
+									"}"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+									"pm.test('Metric detail has name and measurements', function () {",
+									"  const json = pm.response.json();",
+									"  pm.expect(json).to.have.property('name');",
+									"  pm.expect(json).to.have.property('measurements');",
+									"  pm.expect(json.measurements).to.be.an('array');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/metrics/metrics/:metricName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"metrics",
+								"metrics",
+								":metricName"
+							],
+							"variable": [
+								{
+									"key": "metricName",
+									"value": "{{metricName}}"
+								}
+							]
+						},
+						"description": "Fetches one specific metric by name selected from the index call."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application",
+			"item": []
+		},
+		{
+			"name": "Chat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Basic tests",
+							"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+							"pm.test('Response has question and answer', function () {",
+							"  const json = pm.response.json();",
+							"  pm.expect(json).to.have.property('question');",
+							"  pm.expect(json).to.have.property('answer');",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"question\": \"What is the capital of Zambia and what foods are eaten in the country?\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat"
+					]
+				},
+				"description": "Calls the chat endpoint with a question and returns an answer."
+			},
+			"response": [
+				{
+					"name": "Example 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"question\": \"What is the capital of Zambia?\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"question\": \"What is the capital of Zambia?\",\n  \"answer\": \"Lusaka.\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081",
+			"type": "string"
+		}
+	]
+}

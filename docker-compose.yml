@@ -1,0 +1,16 @@
+services:
+  spring-app:
+    build: .
+    container_name: spring-ai-app
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_AI_VECTORSTORE_CHROMA_CLIENT_HOST: http://chroma
+      SPRING_AI_VECTORSTORE_CHROMA_CLIENT_PORT: 8000
+      SPRING_AI_OLLAMA_BASE_URL: http://host.docker.internal:11434
+    networks:
+      - spring-ai-net
+
+networks:
+  spring-ai-net:
+    driver: bridge
