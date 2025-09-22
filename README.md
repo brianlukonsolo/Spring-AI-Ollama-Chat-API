@@ -22,7 +22,7 @@ Download and install Ollama
 This will allow you to run AI models locally on your computer. See documentation here:
 - https://docs.ollama.com/
 
-Pull a model by running the followind command in your CMD prompt:
+Pull a model by running the following command in your CMD prompt:
 - ```ollama pull llama3.2```
 
 _Note: This project uses llama3.2 by default but you can change to a model of your choice by updating application.properties. Ensure that you have pulled the model of your choice before attempting to run this Java project. You can also (optionally) pull and run models from Huggingface on Ollama: https://huggingface.co/docs/hub/en/ollama_
