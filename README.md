@@ -1,6 +1,13 @@
 # Spring AI - Ollama Chat
 The bare minimun needed to chat with your locally running Ollama AI models.
 
+## Architecture
+<p align="center">
+  <a href="documents/architecture.png">
+    <img src="documents/architecture.png" alt="Architecture" width="600">
+  </a>
+</p>
+
 ## Pre-requisites:
 
 - Java 21

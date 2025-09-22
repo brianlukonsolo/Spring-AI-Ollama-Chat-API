@@ -1,0 +1,51 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Page-1" id="D7ZYF_hbqmbs6ifgAlOX">
+    <mxGraphModel dx="1277" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aLEHwR972HRS8R3vMf2F-10" value="Windows 11 Machine" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="100" y="420" width="810" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=30;entryPerimeter=0;" edge="1" parent="aLEHwR972HRS8R3vMf2F-10" source="aLEHwR972HRS8R3vMf2F-3" target="aLEHwR972HRS8R3vMf2F-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-26" value="Chat (HTTP / Port 8081)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="aLEHwR972HRS8R3vMf2F-25">
+          <mxGeometry x="-0.1529" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-3" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-10">
+          <mxGeometry x="20" y="90" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-9" value="Docker" style="swimlane;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-10">
+          <mxGeometry x="220" y="50" width="180" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-2" value="Application" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-9">
+          <mxGeometry x="36" y="40" width="127.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-11" value="Ollama Service&lt;br&gt;(Local)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-10">
+          <mxGeometry x="453" y="100" width="134" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-31" value="Large Language Models" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f9f7ed;strokeColor=#36393d;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-10">
+          <mxGeometry x="650" y="70" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-32" value="mistral" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-31">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-33" value="llama3.2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-31">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-34" value=". . ." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="aLEHwR972HRS8R3vMf2F-31">
+          <mxGeometry y="90" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=57;entryDy=0;entryPerimeter=0;" edge="1" parent="aLEHwR972HRS8R3vMf2F-10" source="aLEHwR972HRS8R3vMf2F-2" target="aLEHwR972HRS8R3vMf2F-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aLEHwR972HRS8R3vMf2F-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=77;entryDy=100;entryPerimeter=0;" edge="1" parent="aLEHwR972HRS8R3vMf2F-10" source="aLEHwR972HRS8R3vMf2F-31" target="aLEHwR972HRS8R3vMf2F-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
